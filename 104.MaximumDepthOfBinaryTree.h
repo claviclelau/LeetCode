@@ -21,31 +21,48 @@ public:
 		stack<TreeNode *> stk;
 		stk.push(root);
 		int max_depth = 0;
-		TreeNode * my_node, * temp_node;
+		TreeNode * my_node = root;
+		TreeNode * top;
 		while(!stk.empty())
 		{
-			my_node = stk.top();
-			if (my_node->left)
-				stk.push(my_node->left);
-			else if (my_node->right)
-				stk.push(my_node->right);
-			else
+			top = stk.top();
+			if (top->left==NULL&&top->right==NULL)
 			{
+				my_node = top;
 				max_depth = stk.size()>max_depth?stk.size():max_depth;
+				stk.pop();			
+				continue;
+			}
+			if (my_node==top->right)
+			{
+				my_node = top;
 				stk.pop();
-				temp_node = stk.top();
-				if (temp_node->left == my_node&&temp_node->right)
-					stk.push(temp_node->right);
+				continue;
+			}
+			if (my_node==top->left)
+			{
+				if (top->right)
+					stk.push(top->right);
 				else
 				{
-					while ((!stk.empty())&&((temp_node = stk.top())->right==my_node||(temp_node = stk.top())->right==NULL))
-					{
-						my_node = temp_node;
-						stk.pop();
-					}
+					my_node = top;
+					stk.pop();
 				}
+				continue;
+				continue;
 			}
+			if (top->left)
+				stk.push(top->left);
+			else
+				stk.push(top->right);
 		}
 		return max_depth;
+	}
+	int maxDepthRe(TreeNode * root)
+	{
+		if (!root)
+			return 0;
+		int max_left = maxDepthRe(root->left), max_right = maxDepthRe(root->right);
+		return max(max_left, max_right)+1;
 	}
 };
