@@ -7,6 +7,7 @@ public:
         if (num.size()==0)
             return answer;
         permuteUniqueRecursive(num, answer, 0);
+		return answer;
     }
     void permuteUniqueRecursive(vector<int> & num, vector<vector<int> > & answer, int n)
     {

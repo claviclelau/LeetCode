@@ -2,7 +2,7 @@
 //2. Use O(n) space.
 class Solution {
 public:
-	int minimumTotal_1(vector<vector<int> > &triangle) {
+	int minimumTotal(vector<vector<int> > &triangle) {
 		return minimumTotal_2(triangle);
 	}
     int minimumTotal_1(vector<vector<int> > &triangle) {
