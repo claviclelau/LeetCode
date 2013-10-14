@@ -4,9 +4,7 @@ public:
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
         vector<int> row(n,0);
-        vector<vector<int> > matrix;
-        for (int i = 0; i<n; i++)
-            matrix.push_back(row);
+        vector<vector<int> > matrix(n, row);
         
         char next_move = 0;
         int i_row = 0, i_col = 0;
