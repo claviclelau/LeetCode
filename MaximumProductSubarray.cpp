@@ -1,6 +1,9 @@
 class Solution {
 public:
     int maxProduct(int A[], int n) {
+        return maxProductDP(A, n);
+    }
+    int maxProduct_1(int A[], int n) {
         if (n == 1)
             return A[0];
         int result = 0;
@@ -53,5 +56,30 @@ public:
         b = a + 1;
         while (b < n && A[b] != 0)
             ++b;
+    }
+
+
+    int maxProductDP(int A[], int n)
+    {
+        if (n == 1)
+            return A[0];
+
+        int curMax, curMin, ret;
+        ret = curMax = curMin = A[0];
+        for(int i = 1; i<n; ++i)
+        {
+            int tempMax = curMax * A[i];
+            int tempMin = curMin * A[i];
+            if (tempMin > tempMax)
+            {
+                int temp = tempMin;
+                tempMin = tempMax;
+                tempMax = temp;
+            }
+            curMax = tempMax > A[i] ? tempMax : A[i];
+            curMin = tempMin < A[i] ? tempMin : A[i];
+            ret = ret > curMax ? ret : curMax;
+        }
+        return ret;
     }
 };
